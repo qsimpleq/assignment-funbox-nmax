@@ -1,0 +1,10 @@
+require:
+  - rubocop-rake
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.6
+Style/Documentation:
+  Enabled: false
+Layout/LineLength:
+  Max: 120

@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "nmax"
+
+module NmaxRunner
+  HELP_MESSAGE = 'Usage: cat sample_data.txt | nmax [number_of_largest_integers_to_count]'
+
+  def self.run
+    Nmax.new(parse_cli)
+  end
+
+  def self.parse_cli
+    if !File.pipe?($stdin) || ARGV.empty? || ARGV.size > 1 || !ARGV[0].match(/\A-?\d+\z/)
+      puts HELP_MESSAGE
+      exit(0)
+    end
+
+    { number: ARGV[0].to_i }
+  end
+end
+
+NmaxRunner.run
