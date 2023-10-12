@@ -9,7 +9,11 @@ module NmaxRunner
 
   def self.run
     nmax = Nmax::Runner.new(parse_cli)
-    nmax.calculate
+    nmax.calculate do |result|
+      result.keys.sort { |a, b| b <=> a }.each do |key|
+        puts [key] * result[key]
+      end
+    end
   end
 
   def self.parse_cli
