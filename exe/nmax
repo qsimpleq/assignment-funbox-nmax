@@ -1,19 +1,14 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# require "nmax"
-require_relative '../lib/nmax'
+require 'nmax'
 
 module NmaxRunner
   HELP_MESSAGE = 'Usage: cat sample_data.txt | nmax [number_of_largest_integers_to_count]'
 
   def self.run
-    nmax = Nmax::Runner.new(parse_cli)
-    nmax.calculate do |result|
-      result.keys.sort { |a, b| b <=> a }.each do |key|
-        puts [key] * result[key]
-      end
-    end
+    nmax = Nmax.build(parse_cli)
+    nmax.print_cli
   end
 
   def self.parse_cli

@@ -16,14 +16,11 @@ module Nmax
         @options = options
       end
 
-      def parse(line)
+      def run(line)
         data = split(line)
         return if data.empty?
 
-        @options[:min] ||= data[0]
-        @options[:max] ||= data[0]
-
-        processing(data)
+        parse(data)
         storage_cleaning
       end
 
@@ -35,26 +32,25 @@ module Nmax
           .gsub(REGEXP_ONLY_NUMBERS_SPACES, ' ')
           .gsub(REGEXP_MULTISPACES, ' ')
           .split(' ')
-          .reject { _1.length > options[:number_max_length] }
+          .reject { |e| e.length > options[:number_max_length] }
           .map(&:to_i) || []
       end
 
-      def processing(data)
-        data.each do |num|
-          if @options[:storage].keys.size >= options[:numbers_limit]
-            next if num < @options[:min]
+      def parse(data)
+        data.each do |current_number|
+          next if ignore_too_small_number?(current_number)
 
-            if num > @options[:max]
-              @options[:storage].delete(@options[:min])
-              @options[:min] = @options[:storage].keys.min
-            end
-          end
+          recalc_storage_if_new_max_find(current_number)
+          recalc_min_max(current_number)
+          storage_add(current_number)
+        end
+      end
 
-          @options[:min] = num if @options[:min] > num
-          @options[:max] = num if @options[:max] < num
-
-          @options[:storage][num] = 0 unless @options[:storage].key?(num)
-          @options[:storage][num] += 1
+      def ignore_too_small_number?(current_number)
+        if !@options[:min].nil? && \
+           current_number < @options[:min] && \
+           @options[:storage].keys.size >= @options[:numbers_limit]
+          true
         end
       end
     end

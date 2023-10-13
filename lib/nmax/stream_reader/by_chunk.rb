@@ -10,9 +10,7 @@ module Nmax
       end
 
       def run(&block)
-        while (char = @options[:stream].read(@options[:number_max_length]))
-          block.call(char)
-        end
+        block.call(@options[:stream].readchar) until @options[:stream].eof?
       end
     end
   end

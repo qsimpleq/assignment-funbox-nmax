@@ -14,13 +14,18 @@ module Nmax
       reader = build_reader(options)
       reader.run { |*args| parser.run(*args) }
 
-      if block_given?
-        yield parse_options[:storage]
-      else
-        parse_options[:storage]
-      end
+      result = parse_options[:storage]
+      block_given? ? yield(result) : result
     ensure
       @options[:stream].close
+    end
+
+    def print_cli
+      calculate do |result|
+        result.keys.sort { |a, b| b <=> a }.each do |key|
+          puts [key] * result[key]
+        end
+      end
     end
 
     private
@@ -43,7 +48,7 @@ module Nmax
 
     def options_defaults(options)
       options[:numbers_limit] ||= 10
-      options[:number_max_length] ||= 2
+      options[:number_max_length] ||= 1000
       options[:parser] ||= :ByChunk
       options
     end

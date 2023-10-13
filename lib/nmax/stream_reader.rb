@@ -6,6 +6,6 @@ module Nmax
       Object.const_get("Nmax::StreamReader::#{options[:parser]}").new(options)
     end
   end
-  StreamReader.autoload(:ByChunk, './nmax/stream_reader/by_chunk')
-  StreamReader.autoload(:ByLine, './nmax/stream_reader/by_line')
+  StreamReader.autoload(:ByChunk, "#{Nmax::NMAXDIR}/stream_reader/by_chunk")
+  StreamReader.autoload(:ByLine, "#{Nmax::NMAXDIR}/stream_reader/by_line")
 end

@@ -27,6 +27,14 @@ module Nmax
       end
 
       def run(chunk)
+        parse(chunk)
+
+        storage_cleaning
+      end
+
+      private
+
+      def parse(chunk)
         chunk.each_char do |char|
           if @current_number.nil? && numeric?(char)
             @current_number = char
@@ -37,11 +45,7 @@ module Nmax
             add_number
           end
         end
-
-        storage_cleaning
       end
-
-      private
 
       def numeric?(char)
         NUMBERS.key?(char)
@@ -55,9 +59,8 @@ module Nmax
 
         recalc_storage_if_new_max_find(current_number)
         recalc_min_max(current_number)
+        storage_add(current_number)
 
-        @options[:storage][current_number] = 0 unless @options[:storage].key?(current_number)
-        @options[:storage][current_number] += 1
         @current_number = nil
 
         current_number
@@ -75,27 +78,10 @@ module Nmax
         if !@options[:min].nil? && \
            current_number < @options[:min] && \
            @options[:storage].keys.size >= @options[:numbers_limit]
-          @current_number = nil
 
+          @current_number = nil
           true
         end
-      end
-
-      def recalc_storage_if_new_max_find(current_number)
-        return if @options[:storage].keys.size < options[:numbers_limit]
-        return if current_number <= @options[:max]
-
-        if @options[:storage][@options[:min]] > 1
-          @options[:storage][@options[:min]] -= 1
-        else
-          @options[:storage].delete(@options[:min])
-          @options[:min] = @options[:storage].keys.min
-        end
-      end
-
-      def recalc_min_max(current_number)
-        @options[:min] = current_number if @options[:min].nil? || @options[:min] > current_number
-        @options[:max] = current_number if @options[:max].nil? || @options[:max] < current_number
       end
     end
   end

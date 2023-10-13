@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'rspec'
 require 'nmax'
 
 RSpec.configure do |config|
