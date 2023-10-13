@@ -19,7 +19,6 @@ module Nmax
       else
         parse_options[:storage]
       end
-
     ensure
       @options[:stream].close
     end
@@ -34,7 +33,7 @@ module Nmax
       StreamParser.build(options[:parser] ? options : @options)
     end
 
-    def build_parse_options(options)
+    def build_parser_options(options)
       options.merge(
         storage: {},
         min: nil,

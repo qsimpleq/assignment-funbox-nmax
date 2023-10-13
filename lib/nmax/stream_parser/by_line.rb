@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
+require_relative 'helper'
+
 module Nmax
   module StreamParser
     class ByLine
-      attr :options
+      include Nmax::StreamParser::Helper
+
+      attr_reader :options
+
       REGEXP_ONLY_NUMBERS_SPACES = Regexp.new('[^0-9\s]+')
       REGEXP_MULTISPACES = Regexp.new('\s+')
 
@@ -50,19 +55,6 @@ module Nmax
 
           @options[:storage][num] = 0 unless @options[:storage].key?(num)
           @options[:storage][num] += 1
-        end
-      end
-
-      def storage_cleaning
-        storage_values_sum = @options[:storage].values.sum
-        while storage_values_sum > options[:numbers_limit]
-          if storage_values_sum - @options[:storage][@options[:min]] >= options[:numbers_limit]
-            @options[:storage].delete(@options[:min])
-            @options[:min] = @options[:storage].keys.min
-          else
-            @options[:storage][@options[:min]] -= 1
-          end
-          storage_values_sum = @options[:storage].values.sum
         end
       end
     end
