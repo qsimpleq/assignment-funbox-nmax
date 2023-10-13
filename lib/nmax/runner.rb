@@ -4,7 +4,7 @@ module Nmax
   class Runner
     attr_reader :options
 
-    def initialize(options, &block)
+    def initialize(options)
       @options = options_defaults(options)
     end
 
