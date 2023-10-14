@@ -8,7 +8,7 @@ module NmaxRunner
 
   def self.run
     nmax = Nmax.build(parse_cli)
-    nmax.print_cli
+    nmax.sorted_result { |s| puts s }
   end
 
   def self.parse_cli

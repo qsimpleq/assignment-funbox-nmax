@@ -20,10 +20,11 @@ module Nmax
       @options[:stream].close
     end
 
-    def print_cli
+    def sorted_result
       calculate do |result|
-        result.keys.sort { |a, b| b <=> a }.each do |key|
-          puts [key] * result[key]
+        result.keys.sort { |a, b| b <=> a }.map do |key|
+          r = [key] * result[key]
+          block_given? ? yield(r) : r
         end
       end
     end
