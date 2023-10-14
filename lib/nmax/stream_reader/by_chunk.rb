@@ -10,7 +10,7 @@ module Nmax
       end
 
       def run(&block)
-        block.call(@options[:stream].readchar) until @options[:stream].eof?
+        @options[:stream].each(options[:number_max_length]) { |chunk| block.call(chunk) }
       end
     end
   end
