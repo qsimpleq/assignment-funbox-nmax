@@ -1,4 +1,4 @@
-[![CI](https://github.com/qsimpleq/assignment-funbox-nmax/actions/workflows/main.yml/badge.svg?branch=main&event=push)](https://github.com/qsimpleq/assignment-funbox-nmax/actions/workflows/main.yml)
+[![CI](https://github.com/qsimpleq/assignment-funbox-nmax/actions/workflows/main.yml/badge.svg)](https://github.com/qsimpleq/assignment-funbox-nmax/actions/workflows/main.yml)
 
 # Nmax
 
