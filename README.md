@@ -5,6 +5,24 @@
 The `nmax` script reads text data from an incoming stream,\
 at the end of the input it outputs the `n` largest integers encountered in the received text data
 
+
+<details><summary>Формулировка ТЗ под спойлером</summary>
+
+[ссылка на основной репозиторий](https://github.com/qsimpleq/assignment-funbox-ruby-rails-developer#1-%D0%BD%D0%B0%D0%BF%D0%B8%D1%88%D0%B8%D1%82%D0%B5-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82-nmax-%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D1%8B%D0%B9-%D0%B4%D0%B5%D0%BB%D0%B0%D0%B5%D1%82-%D1%81%D0%BB%D0%B5%D0%B4%D1%83%D1%8E%D1%89%D0%B5%D0%B5)
+
+# Напишите скрипт nmax, который делает следующее:
+* читает из входящего потока текстовые данные
+* по завершении ввода выводит n самых больших целых чисел, встретившихся в полученных текстовых данных.
+
+Дополнительные указания:
+* числом считается любая непрерывная последовательность цифр в тексте
+* известно, что чисел длиннее 1000 цифр во входных данных нет
+* число n должно быть единственным параметром скрипта
+* код должен быть покрыт тестами
+* код должен быть оформлен в виде гема (содержащего исполняемый файл, код модулей и т.д.)
+* плюсом является размещение на Github и интеграция с Travis CI.
+</details>
+
 ## Installation
 
 Install the gem and add to the application's Gemfile by executing:
